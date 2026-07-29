@@ -250,6 +250,12 @@ nav ul a:hover{ color:var(--violet); }
 .cita a:hover .under{ width:88px; background:var(--violet); }
 
 /* ---------- GALERÍA (carrusel en desktop, stack en mobile) ---------- */
+.gallery-row + .gallery-row{ margin-top:3rem; }
+.gallery-row-label{
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.7rem;
+  letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:1rem;
+}
 .gallery-wrap{ position:relative; display:flex; align-items:center; gap:0.8rem; }
 .gallery-grid{
   display:flex;

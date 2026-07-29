@@ -1,7 +1,7 @@
 const tracks = [
-  '[ nombre de la canción ]',
-  '[ nombre de la canción ]',
-  '[ nombre de la canción ]',
+  '[ Cúspide ]',
+  '[ Reinventar ]',
+  '[ Silly ]',
 ];
 
 export default function Musica() {
