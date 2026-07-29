@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 const slides = [
   {
     id: 1,
-    eyebrow: 'Formosa, Argentina',
+    eyebrow: null,
     heading: 'Antónica: música que cuenta historias',
     url: '/images/hero1.png',
   },

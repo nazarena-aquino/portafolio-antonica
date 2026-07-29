@@ -105,9 +105,16 @@ nav ul a:hover{ color:var(--violet); }
 }
 .scroll-cue::after{ content:''; width:1px; height:36px; background:linear-gradient(var(--gold), transparent); }
 
+@media(max-width:760px){
+  .hero{ min-height:52vh; }
+  .hero-track{ height:52vh; }
+  .hero-slide{ height:52vh; padding:5.5rem 6vw 2.5rem; }
+  .hero h1{ font-size:clamp(1.8rem, 7vw, 2.6rem); }
+}
+
 /* ---------- BIO ---------- */
 .bio{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:5vw; align-items:center; }
-@media(max-width:860px){ .bio{ grid-template-columns:1fr; } }
+@media(max-width:860px){ .bio{ grid-template-columns:1fr; } .bio-copy{ order:-1; } }
 .portrait{
   aspect-ratio:4/5; border-radius:3px; overflow:hidden;
   background:var(--bg-alt);
@@ -136,7 +143,11 @@ nav ul a:hover{ color:var(--violet); }
 /* ---------- MATERNIDAD ---------- */
 .maternidad{ background:var(--bg); }
 .maternidad-layout{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:5vw; align-items:center; }
-@media(max-width:860px){ .maternidad-layout{ grid-template-columns:1fr; } .maternidad-layout .maternidad-photos{ order:-1; } }
+@media(max-width:860px){
+  .maternidad-layout{ grid-template-columns:1fr; }
+  .maternidad-copy{ order:-1; }
+  .maternidad-photos{ order:1; }
+}
 .maternidad-copy p{ font-size:1.05rem; line-height:1.85; color:var(--ink-muted); margin-bottom:1.3rem; }
 .maternidad-copy p strong{ color:var(--ink); font-weight:600; }
 .maternidad-copy blockquote{
@@ -189,46 +200,208 @@ nav ul a:hover{ color:var(--violet); }
 .listen-btn:hover{ background:var(--gold); }
 
 /* ---------- LIBRO ---------- */
-.libro{ background: radial-gradient(ellipse at 80% 20%, rgba(140,71,114,0.06), transparent 55%), var(--bg-alt-2); }
-.book-layout{ display:grid; grid-template-columns:1fr 0.75fr; gap:5vw; align-items:center; }
-@media(max-width:860px){ .book-layout{ grid-template-columns:1fr; } .book-layout .cover{ order:-1; } }
-.badge-soon{
-  display:inline-block; font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.66rem;
-  letter-spacing:0.16em; text-transform:uppercase; color:var(--violet);
-  border:1px solid rgba(140,71,114,0.35); padding:0.4rem 1rem;
-  border-radius:999px; margin-bottom:1.5rem;
+.libro {
+  background: radial-gradient(
+      ellipse at 80% 20%,
+      rgba(140, 71, 114, 0.06),
+      transparent 55%
+    ),
+    var(--bg-alt-2);
+  padding: 5rem 0;
 }
-.book-layout h2{ font-size:clamp(2rem, 4.4vw, 2.8rem); font-style:italic; line-height:1.15; max-width:14ch; }
-.book-layout p{ color:var(--ink-muted); line-height:1.85; max-width:42ch; margin-top:1.4rem; }
-.notify-row{
-  margin-top:2.2rem; display:flex; max-width:380px;
-  border:1px solid var(--line); border-radius:4px; overflow:hidden;
-  background:var(--bg); box-shadow:var(--card-shadow);
+
+.book-layout {
+  display: grid;
+  grid-template-columns: minmax(500px, 650px) minmax(340px, 380px);
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
+
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
-.notify-row input{
-  flex:1; background:transparent; border:none; padding:0.9rem 1.3rem;
-  color:var(--ink); font-family:'Hanken Grotesk', sans-serif; font-size:0.9rem;
+
+.book-layout > div:first-child {
+  max-width: 650px;
+  justify-self: start;
 }
-.notify-row input::placeholder{ color:var(--ink-muted); }
-.notify-row button{
-  background:var(--violet); border:none; padding:0 1.7rem; color:#fff;
-  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.68rem;
-  letter-spacing:0.12em; text-transform:uppercase; cursor:pointer;
+
+.badge-soon {
+  display: inline-block;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--violet);
+  border: 1px solid rgba(140, 71, 114, 0.35);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1.6rem;
 }
-.notify-row button:disabled{ opacity:0.6; cursor:not-allowed; }
-.notify-msg{ margin-top:0.8rem; font-size:0.78rem; color:var(--ink-muted); }
-.cover{
-  aspect-ratio:2/3; background:var(--bg-alt);
-  border:1px solid var(--line); box-shadow:var(--card-shadow);
-  position:relative; overflow:hidden;
+
+.book-layout h2 {
+  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  font-style: italic;
+  line-height: 1.15;
+  max-width: 14ch;
 }
-.cover img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.cover .thread-line{
-  position:absolute; top:8%; left:22%; width:1px; height:70%;
-  background:linear-gradient(var(--gold), transparent); opacity:0.6;
-  z-index:2;
+
+.book-layout p {
+  color: var(--ink-muted);
+  line-height: 1.85;
+  max-width: 42ch;
+  margin-top: 1.5rem;
 }
-.cover small{ font-family:'Hanken Grotesk', sans-serif; font-size:0.6rem; color:var(--ink-muted); letter-spacing:0.12em; text-transform:uppercase; position:relative; z-index:2; }
+
+.notify-row {
+  margin-top: 2.4rem;
+  display: flex;
+  max-width: 380px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--card-shadow);
+}
+
+.notify-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.9rem 1.3rem;
+  color: var(--ink);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 0.9rem;
+}
+
+.notify-row input::placeholder {
+  color: var(--ink-muted);
+}
+
+.notify-row button {
+  background: var(--violet);
+  border: none;
+  padding: 0 1.7rem;
+  color: #fff;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.notify-row button:hover {
+  opacity: 0.92;
+}
+
+.notify-row button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.notify-msg {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.cover {
+  aspect-ratio: 2/3;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 360px;
+
+  justify-self: center;
+}
+
+.cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover .thread-line {
+  position: absolute;
+  top: 8%;
+  left: 22%;
+  width: 1px;
+  height: 70%;
+  background: linear-gradient(var(--gold), transparent);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.cover small {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 0.6rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- RESPONSIVE MOBILE ---------- */
+
+@media (max-width: 860px) {
+
+  .book-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.8rem;
+    padding: 0 1.4rem;
+    max-width: 100%;
+  }
+
+  .book-layout > div:first-child {
+    order: 1;
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+  }
+
+  .book-layout > div:last-child {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cover {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .book-layout h2 {
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  .book-layout p {
+    max-width: 100%;
+    margin: 1.5rem auto 0;
+  }
+
+  .notify-row {
+    margin: 2rem auto 0;
+    width: 100%;
+    max-width: 380px;
+  }
+}
 
 /* ---------- CITA (about brief) ---------- */
 .cita{
@@ -249,7 +422,7 @@ nav ul a:hover{ color:var(--violet); }
 .cita a .under{ width:48px; height:1px; background:var(--gold); transition:width 0.4s, background 0.4s; }
 .cita a:hover .under{ width:88px; background:var(--violet); }
 
-/* ---------- GALERÍA (carrusel en desktop, stack en mobile) ---------- */
+/* ---------- GALERÍA (dos filas: Fotos y Videoclips, cada una su carrusel) ---------- */
 .gallery-row + .gallery-row{ margin-top:3rem; }
 .gallery-row-label{
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.7rem;
