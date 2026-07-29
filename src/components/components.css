@@ -1,0 +1,373 @@
+/* ---------- NAV ---------- */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.5rem 6vw;
+  background:rgba(255,248,245,0.85);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+nav .brand{ font-family:'Playfair Display', serif; font-size:1.15rem; letter-spacing:0.04em; color:var(--gold); display:flex; align-items:center; gap:0.4rem; }
+nav .brand span{ color:var(--violet); }
+nav ul{
+  list-style:none; display:flex; gap:2.2rem;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-muted);
+}
+nav ul a:hover{ color:var(--violet); }
+@media(max-width:760px){ nav ul{ display:none; } }
+
+/* ---------- HERO CARRUSEL ---------- */
+.hero{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+}
+.hero-track{
+  display:flex;
+  width:100%; height:100vh;
+  transition:transform 0.9s cubic-bezier(0.65,0,0.35,1);
+}
+.hero-slide{
+  min-width:100%; height:100vh; position:relative;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:8rem 6vw 4rem;
+}
+.hero-slide .slide-bg{
+  position:absolute; inset:0; z-index:0;
+  background:var(--bg-alt-3);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.hero-slide .slide-bg img{
+  width:100%; height:100%; object-fit:cover;
+}
+.hero-slide .slide-bg span{
+  font-family:'Hanken Grotesk', sans-serif; font-size:0.68rem;
+  letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-muted);
+  opacity:0.6;
+}
+.hero-slide .slide-bg::after{
+  content:'';
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(255,248,245,0.85), rgba(255,248,245,0.15) 45%, rgba(255,248,245,0.25));
+}
+.hero-slide-1 .slide-bg{ background:linear-gradient(155deg, #efe3d6, #e9e1dc 60%, #f5ece7); }
+.hero-slide-2 .slide-bg{ background:linear-gradient(155deg, #f0e2ea, #e9e1dc 60%, #f5ece7); }
+.hero-slide-3 .slide-bg{ background:linear-gradient(155deg, #e6d9e2, #ecd9c9 55%, #f5ece7); }
+.hero-content{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+.hero .eyebrow::before{ display:none; }
+.hero h1{
+  font-size:clamp(2.6rem, 8vw, 5.6rem);
+  line-height:1.05;
+  font-style:italic;
+  max-width:16ch;
+}
+.hero-divider{ width:48px; height:1px; background:rgba(112,88,50,0.4); }
+
+.hero-controls{
+  position:absolute; z-index:10; top:50%; left:0; right:0;
+  transform:translateY(-50%);
+  display:flex; justify-content:space-between;
+  padding:0 6vw;
+  pointer-events:none;
+}
+.hero-controls button{
+  pointer-events:auto;
+  width:48px; height:48px; border-radius:999px;
+  border:1px solid rgba(112,88,50,0.25);
+  background:rgba(255,248,245,0.5);
+  color:var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition:background 0.4s, color 0.4s;
+}
+.hero-controls button:hover{ background:var(--gold); color:var(--bg); }
+
+.hero-dots{
+  position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
+  z-index:10; display:flex; gap:0.6rem;
+}
+.hero-dots button{
+  width:8px; height:8px; border-radius:999px; border:none;
+  background:rgba(112,88,50,0.25); cursor:pointer; padding:0;
+  transition:background 0.3s, width 0.3s;
+}
+.hero-dots button.active{ background:var(--gold); width:22px; }
+
+.scroll-cue{
+  position:absolute; bottom:2.5rem; right:6vw;
+  z-index:10;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.62rem;
+  letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-muted);
+  display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+}
+.scroll-cue::after{ content:''; width:1px; height:36px; background:linear-gradient(var(--gold), transparent); }
+
+/* ---------- BIO ---------- */
+.bio{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:5vw; align-items:center; }
+@media(max-width:860px){ .bio{ grid-template-columns:1fr; } }
+.portrait{
+  aspect-ratio:4/5; border-radius:3px; overflow:hidden;
+  background:var(--bg-alt);
+  border:1px solid var(--line);
+  box-shadow:var(--card-shadow);
+  position:relative;
+}
+.portrait img{ width:100%; height:100%; object-fit:cover; }
+.portrait .placeholder-label{
+  position:absolute; bottom:1rem; left:1rem;
+  font-family:'Hanken Grotesk', sans-serif; font-size:0.62rem;
+  color:var(--ink-muted); letter-spacing:0.1em; text-transform:uppercase;
+}
+.bio-copy p{ font-size:1.05rem; line-height:1.85; color:var(--ink-muted); margin-bottom:1.3rem; }
+.bio-copy p strong{ color:var(--ink); font-weight:600; }
+.bio-stats{
+  display:flex; gap:3rem; margin-top:2rem;
+  border-top:1px solid var(--line); padding-top:1.5rem;
+}
+.bio-stats div b{ display:block; font-family:'Playfair Display', serif; font-size:1.5rem; color:var(--gold); }
+.bio-stats div small{
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.62rem;
+  letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted);
+}
+
+/* ---------- MATERNIDAD ---------- */
+.maternidad{ background:var(--bg); }
+.maternidad-layout{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:5vw; align-items:center; }
+@media(max-width:860px){ .maternidad-layout{ grid-template-columns:1fr; } .maternidad-layout .maternidad-photos{ order:-1; } }
+.maternidad-copy p{ font-size:1.05rem; line-height:1.85; color:var(--ink-muted); margin-bottom:1.3rem; }
+.maternidad-copy p strong{ color:var(--ink); font-weight:600; }
+.maternidad-copy blockquote{
+  font-family:'Playfair Display', serif; font-style:italic;
+  font-size:1.2rem; color:var(--ink); line-height:1.6;
+  border-left:2px solid var(--gold); padding-left:1.3rem; margin:1.6rem 0;
+}
+.badge-momento{
+  display:inline-block; font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.66rem;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);
+  border:1px solid rgba(112,88,50,0.35); padding:0.4rem 1rem;
+  border-radius:999px; margin-bottom:1.5rem;
+}
+.maternidad-photos{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.maternidad-photos .portrait:first-child{ grid-column:1 / -1; aspect-ratio:16/10; }
+
+/* ---------- MÚSICA ---------- */
+.musica{ background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.album-card{ display:grid; grid-template-columns:320px 1fr; gap:4rem; align-items:center; max-width:1100px; }
+@media(max-width:860px){ .album-card{ grid-template-columns:1fr; gap:2.2rem; } }
+.vinyl{
+  aspect-ratio:1; border-radius:6px; position:relative;
+  background:
+    radial-gradient(circle at 50% 50%, var(--bg-alt) 0 8%, transparent 8.5%),
+    conic-gradient(from 90deg, #e4d4b3, #d8c39a 25%, #e4d4b3 50%, #d8c39a 75%, #e4d4b3);
+  border:1px solid var(--line);
+  box-shadow:var(--card-shadow);
+  display:flex; align-items:center; justify-content:center;
+}
+.vinyl span{ font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); }
+.vinyl img{ width:100%; height:100%; object-fit:cover; border-radius:6px; }
+.album-meta h3{ font-size:clamp(2rem,5vw,3rem); font-style:italic; margin-bottom:0.9rem; }
+.album-meta p{ color:var(--ink-muted); line-height:1.8; max-width:44ch; margin-bottom:1.8rem; }
+.track-row{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.9rem 0;
+  border-top:1px solid var(--line);
+  font-family:'Hanken Grotesk', sans-serif; font-size:1rem; color:var(--ink);
+}
+.track-row:last-of-type{ border-bottom:1px solid var(--line); }
+.track-row:hover{ color:var(--violet); cursor:pointer; }
+.track-row .n{ color:var(--gold); font-weight:600; margin-right:0.6rem; }
+.listen-btn{
+  display:inline-flex; align-items:center; gap:0.7rem; margin-top:1.8rem;
+  padding:0.9rem 2.1rem; border:none; border-radius:2px;
+  background:var(--violet); color:#fff;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
+  letter-spacing:0.14em; text-transform:uppercase;
+  transition:background 0.3s;
+}
+.listen-btn:hover{ background:var(--gold); }
+
+/* ---------- LIBRO ---------- */
+.libro{ background: radial-gradient(ellipse at 80% 20%, rgba(140,71,114,0.06), transparent 55%), var(--bg-alt-2); }
+.book-layout{ display:grid; grid-template-columns:1fr 0.75fr; gap:5vw; align-items:center; }
+@media(max-width:860px){ .book-layout{ grid-template-columns:1fr; } .book-layout .cover{ order:-1; } }
+.badge-soon{
+  display:inline-block; font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.66rem;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--violet);
+  border:1px solid rgba(140,71,114,0.35); padding:0.4rem 1rem;
+  border-radius:999px; margin-bottom:1.5rem;
+}
+.book-layout h2{ font-size:clamp(2rem, 4.4vw, 2.8rem); font-style:italic; line-height:1.15; max-width:14ch; }
+.book-layout p{ color:var(--ink-muted); line-height:1.85; max-width:42ch; margin-top:1.4rem; }
+.notify-row{
+  margin-top:2.2rem; display:flex; max-width:380px;
+  border:1px solid var(--line); border-radius:4px; overflow:hidden;
+  background:var(--bg); box-shadow:var(--card-shadow);
+}
+.notify-row input{
+  flex:1; background:transparent; border:none; padding:0.9rem 1.3rem;
+  color:var(--ink); font-family:'Hanken Grotesk', sans-serif; font-size:0.9rem;
+}
+.notify-row input::placeholder{ color:var(--ink-muted); }
+.notify-row button{
+  background:var(--violet); border:none; padding:0 1.7rem; color:#fff;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.68rem;
+  letter-spacing:0.12em; text-transform:uppercase; cursor:pointer;
+}
+.notify-row button:disabled{ opacity:0.6; cursor:not-allowed; }
+.notify-msg{ margin-top:0.8rem; font-size:0.78rem; color:var(--ink-muted); }
+.cover{
+  aspect-ratio:2/3; background:var(--bg-alt);
+  border:1px solid var(--line); box-shadow:var(--card-shadow);
+  position:relative; overflow:hidden;
+}
+.cover img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.cover .thread-line{
+  position:absolute; top:8%; left:22%; width:1px; height:70%;
+  background:linear-gradient(var(--gold), transparent); opacity:0.6;
+  z-index:2;
+}
+.cover small{ font-family:'Hanken Grotesk', sans-serif; font-size:0.6rem; color:var(--ink-muted); letter-spacing:0.12em; text-transform:uppercase; position:relative; z-index:2; }
+
+/* ---------- CITA (about brief) ---------- */
+.cita{
+  text-align:center; max-width:800px; margin:0 auto;
+  display:flex; flex-direction:column; align-items:center; gap:2.5rem;
+}
+.cita .star{ font-size:2rem; color:var(--gold); opacity:0.5; }
+.cita blockquote{
+  font-family:'Playfair Display', serif; font-style:italic;
+  font-size:clamp(1.3rem, 3vw, 1.7rem); line-height:1.6; color:var(--ink);
+}
+.cita a{
+  display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
+  letter-spacing:0.2em; text-transform:uppercase; color:var(--ink);
+}
+.cita a:hover{ color:var(--violet); }
+.cita a .under{ width:48px; height:1px; background:var(--gold); transition:width 0.4s, background 0.4s; }
+.cita a:hover .under{ width:88px; background:var(--violet); }
+
+/* ---------- GALERÍA (carrusel en desktop, stack en mobile) ---------- */
+.gallery-wrap{ position:relative; display:flex; align-items:center; gap:0.8rem; }
+.gallery-grid{
+  display:flex;
+  gap:1rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding-bottom:0.5rem;
+  scrollbar-width:none;
+}
+.gallery-grid::-webkit-scrollbar{ display:none; }
+.gallery-item{
+  scroll-snap-align:start;
+  flex:0 0 auto;
+  width:min(320px, 78vw);
+  aspect-ratio:4/5;
+  background:var(--bg-alt); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  font-family:'Hanken Grotesk', sans-serif; font-size:0.62rem; color:var(--ink-muted);
+  letter-spacing:0.1em; text-transform:uppercase; position:relative;
+  border-radius:2px;
+}
+.gallery-item-video{
+  width:min(480px, 88vw);
+  aspect-ratio:16/9;
+}
+.gallery-item img, .gallery-item video, .gallery-item iframe{ width:100%; height:100%; object-fit:cover; border:none; }
+
+.gallery-arrow{
+  flex-shrink:0;
+  width:44px; height:44px; border-radius:999px;
+  border:1px solid rgba(112,88,50,0.3);
+  background:var(--bg);
+  color:var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.05rem; cursor:pointer;
+  transition:background 0.3s, color 0.3s;
+  box-shadow:var(--card-shadow);
+}
+.gallery-arrow:hover{ background:var(--gold); color:var(--bg); }
+
+@media(max-width:760px){
+  .gallery-wrap{ flex-direction:column; }
+  .gallery-arrow{ display:none; }
+  .gallery-grid{
+    flex-direction:column;
+    overflow-x:visible;
+    scroll-snap-type:none;
+  }
+  .gallery-item, .gallery-item-video{
+    width:100%;
+    aspect-ratio:4/5;
+  }
+  .gallery-item-video{ aspect-ratio:16/9; }
+}
+
+/* ---------- AGENDA ---------- */
+.agenda-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.5rem 0; border-top:1px solid var(--line); gap:2rem;
+}
+.agenda-row:last-child{ border-bottom:1px solid var(--line); }
+.agenda-date{ font-family:'Hanken Grotesk', sans-serif; font-weight:600; color:var(--gold); font-size:0.8rem; width:110px; flex-shrink:0; }
+.agenda-info{ flex:1; }
+.agenda-info h4{ font-family:'Playfair Display', serif; font-weight:400; font-size:1.15rem; font-style:italic; }
+.agenda-info span{ color:var(--ink-muted); font-size:0.85rem; }
+.agenda-cta{
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.64rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted); border:1px solid var(--line);
+  padding:0.5rem 1.1rem; border-radius:999px; white-space:nowrap;
+}
+.agenda-empty{ color:var(--ink-muted); font-size:0.9rem; padding:1.5rem 0; border-top:1px solid var(--line); }
+
+/* ---------- CONTACTO ---------- */
+.contacto{ background:var(--bg-alt); text-align:center; padding-bottom:5rem; }
+.contacto h2{ font-size:clamp(2.2rem,6vw,4rem); font-style:italic; max-width:16ch; margin:1rem auto 2.2rem; }
+.contact-form{ max-width:480px; margin:0 auto; text-align:left; display:flex; flex-direction:column; gap:1rem; }
+.contact-form input, .contact-form textarea{
+  width:100%; padding:0.9rem 1.1rem; border:1px solid var(--line);
+  background:var(--bg); border-radius:4px; font-family:'Hanken Grotesk', sans-serif;
+  font-size:0.9rem; color:var(--ink);
+}
+.contact-form textarea{ min-height:120px; resize:vertical; }
+.contact-form button{
+  align-self:flex-start; padding:1rem 2.4rem; background:var(--violet); color:#fff;
+  border:none; border-radius:2px; font-family:'Hanken Grotesk', sans-serif; font-weight:600;
+  font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer;
+  transition:background 0.3s;
+}
+.contact-form button:hover{ background:var(--gold); }
+.contact-form button:disabled{ opacity:0.6; cursor:not-allowed; }
+.form-status{ font-size:0.85rem; color:var(--ink-muted); }
+.socials{
+  margin-top:3rem; display:flex; justify-content:center; gap:2rem;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.7rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+}
+.socials a:hover{ color:var(--violet); }
+
+/* ---------- FOOTER ---------- */
+footer{
+  background:var(--bg-alt-2);
+  border-top:1px solid var(--line);
+  padding:2.6rem 6vw 2rem;
+  display:flex; flex-direction:column; align-items:center; gap:0.9rem;
+  text-align:center;
+}
+.footer-copy{
+  font-family:'Hanken Grotesk', sans-serif; font-size:0.68rem;
+  letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted);
+}
+.footer-credit{
+  font-family:'Hanken Grotesk', sans-serif; font-size:0.72rem;
+  color:var(--ink-muted); display:flex; align-items:center; gap:0.35rem;
+}
+.footer-credit .heart{ color:var(--violet); }
+.footer-credit a{
+  color:var(--gold); font-weight:600; border-bottom:1px solid transparent;
+  transition:border-color 0.3s, color 0.3s;
+}
+.footer-credit a:hover{ color:var(--violet); border-color:var(--violet); }

@@ -1,0 +1,65 @@
+:root{
+  /* ---- Paleta "editorial calido" (nuevo diseno) ----
+     Crema como fondo principal, dorado/bronce como color primario,
+     ciruela/violeta como acento secundario. */
+  --bg:            #fff8f5;   /* surface */
+  --bg-alt:        #fbf2ed;   /* surface-container-low */
+  --bg-alt-2:      #f5ece7;   /* surface-container */
+  --bg-alt-3:      #e9e1dc;   /* surface-container-highest */
+  --ink:           #1e1b18;   /* on-surface */
+  --ink-muted:     #4e463b;   /* on-surface-variant */
+  --gold:          #705832;   /* primary */
+  --gold-soft:     #8b7048;   /* primary-container */
+  --violet:        #8c4772;   /* secondary */
+  --violet-soft:   #ffaadb;   /* secondary-container */
+  --line:          rgba(209,197,183,0.6); /* outline-variant */
+  --card-shadow:   0 20px 45px -25px rgba(30,27,24,0.22);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Hanken Grotesk', sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+}
+::selection{ background:var(--violet-soft); color:var(--ink); }
+h1,h2,h3{ font-family:'Playfair Display', serif; font-weight:400; letter-spacing:-0.01em; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+
+.eyebrow{
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--violet);
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+}
+.eyebrow::before{
+  content:'';
+  width:22px; height:1px;
+  background:var(--gold);
+  display:inline-block;
+}
+
+section{
+  position:relative;
+  padding:7rem 6vw;
+}
+.section-head{ max-width:640px; margin-bottom:3.5rem; }
+.section-head h2{
+  font-size:clamp(2.2rem, 5vw, 3.4rem);
+  margin-top:0.9rem;
+  font-style:italic;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation:none !important; transition:none !important; }
+}
