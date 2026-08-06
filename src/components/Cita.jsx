@@ -4,8 +4,8 @@ export default function Cita() {
       <div className="cita">
         <span className="star">✧</span>
         <blockquote>
-          "En cada nota busco el rastro de quienes estuvieron antes, en cada
-          verso el eco de lo que está por venir."
+          "Cada día es un nuevo comienzo, otra oportunidad de hacerlo
+          mejor. Voy a abrazarlo como si fuera el último."
         </blockquote>
         <a href="#bio">
           <span>Descubrí su mundo</span>

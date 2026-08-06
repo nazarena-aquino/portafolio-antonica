@@ -14,8 +14,13 @@ export default function Bio() {
           un hilo que conecta lo íntimo con lo heredado.
         </p>
         <p>
-          En 2024 publiqué <strong>Géminis</strong>, mi primer disco, y hoy me
-          preparo para dar el salto a la palabra escrita con mi próximo
+          Empecé a componer en 2021, después de un año sin cantar por la
+          pandemia y de perder a mi papá — un antes y un después que me
+          llevó a este camino.
+        </p>
+        <p>
+          En 2024 publiqué <strong>Géminis</strong>, mi primer disco, y hoy
+          me preparo para dar el salto a la palabra escrita con mi próximo
           libro.
         </p>
         <div className="bio-stats">

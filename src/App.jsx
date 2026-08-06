@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Bio from './components/Bio';
 import Maternidad from './components/Maternidad';
 import Musica from './components/Musica';
+import Covers from './components/Covers';
 import Libro from './components/Libro';
 import Cita from './components/Cita';
 import Galeria from './components/Galeria';
@@ -24,10 +25,11 @@ export default function App() {
       <Bio />
       <Maternidad />
       <Musica />
+      <Covers />
       <Libro />
       <Cita />
       <Galeria />
-      <Agenda />
+      {/*<Agenda />*/}
       <Contacto />
       <Footer />
     </div>

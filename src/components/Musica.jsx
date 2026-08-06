@@ -1,7 +1,16 @@
 const tracks = [
-  '[ Cúspide ]',
-  '[ Reinventar ]',
-  '[ Silly ]',
+  {
+    title: 'Guerrero',
+    note: ' El origen de todo — dedicada a mi papá.',
+  },
+  {
+    title: 'Cúspide',
+    note: ' Soñé que Gustavo Cerati me la cantaba.',
+  },
+  {
+    title: 'Anuncio',
+    note: ' Dedicada a mi abuelo Pepe Nicastro.',
+  },
 ];
 
 export default function Musica() {
@@ -16,12 +25,18 @@ export default function Musica() {
           <h3>Géminis</h3>
           <p>
             Un disco sobre la dualidad: dos mitades que conviven en una sola
-            voz. Historias que se cantan porque no alcanzaban con decirse.
+            voz. La mayoría de las canciones nacieron en sueños — me
+            despertaba con una melodía y me sentaba a componerla en el
+            teclado. Lo produjo Nick Schinder (Rosario): cuatro meses a la
+            distancia hasta viajar a grabar las voces.
           </p>
           {tracks.map((t, i) => (
-            <div className="track-row" key={i}>
+            <div className="track-row" key={t.title}>
               <span className="n">{String(i + 1).padStart(2, '0')}</span>
-              <span>{t}</span>
+              <div className="track-info">
+                <span className="track-title">{t.title}</span>
+                <span className="track-note">{t.note}</span>
+              </div>
             </div>
           ))}
           <a
