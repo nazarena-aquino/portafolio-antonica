@@ -1,21 +1,44 @@
 /* ---------- NAV ---------- */
 nav{
   position:fixed; top:0; left:0; right:0; z-index:50;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1.5rem 6vw;
   background:rgba(255,248,245,0.85);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
-nav .brand{ font-family:'Playfair Display', serif; font-size:1.15rem; letter-spacing:0.04em; color:var(--gold); display:flex; align-items:center; gap:0.4rem; }
-nav .brand span{ color:var(--violet); }
-nav ul{
+.nav-bar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.5rem 6vw;
+}
+.brand{ font-family:'Playfair Display', serif; font-size:1.15rem; letter-spacing:0.04em; color:var(--gold); display:flex; align-items:center; gap:0.4rem; }
+.brand span{ color:var(--violet); }
+.nav-links-desktop{
   list-style:none; display:flex; gap:2.2rem;
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
   letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-muted);
 }
-nav ul a:hover{ color:var(--violet); }
-@media(max-width:760px){ nav ul{ display:none; } }
+.nav-links-desktop a:hover{ color:var(--violet); }
+.nav-toggle{
+  display:none;
+  background:none; border:none; cursor:pointer;
+  font-size:1.4rem; color:var(--gold); line-height:1; padding:0.2rem;
+}
+.nav-mobile-menu{
+  display:flex; flex-direction:column;
+  padding:0.5rem 6vw 1.4rem;
+  border-top:1px solid var(--line);
+  background:var(--bg);
+}
+.nav-mobile-menu a{
+  padding:0.9rem 0; border-bottom:1px solid var(--line);
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.82rem;
+  letter-spacing:0.1em; text-transform:uppercase; color:var(--ink);
+}
+.nav-mobile-menu a:last-child{ border-bottom:none; }
+.nav-mobile-menu a:hover{ color:var(--violet); }
+@media(max-width:760px){
+  .nav-links-desktop{ display:none; }
+  .nav-toggle{ display:block; }
+}
 
 /* ---------- HERO CARRUSEL ---------- */
 .hero{
@@ -223,7 +246,7 @@ nav ul a:hover{ color:var(--violet); }
   background:var(--bg); box-shadow:var(--card-shadow);
 }
 .notify-row input{
-  flex:1; background:transparent; border:none; padding:0.9rem 1.3rem;
+  flex:1; min-width:0; background:transparent; border:none; padding:0.9rem 1.3rem;
   color:var(--ink); font-family:'Hanken Grotesk', sans-serif; font-size:0.9rem;
 }
 .notify-row input::placeholder{ color:var(--ink-muted); }
@@ -231,6 +254,11 @@ nav ul a:hover{ color:var(--violet); }
   background:var(--violet); border:none; padding:0 1.7rem; color:#fff;
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.68rem;
   letter-spacing:0.12em; text-transform:uppercase; cursor:pointer;
+  white-space:nowrap; flex-shrink:0;
+}
+@media(max-width:760px){
+  .notify-row button{ padding:0 1.1rem; font-size:0.6rem; }
+  .notify-row input{ padding:0.9rem 0.9rem; }
 }
 .notify-row button:disabled{ opacity:0.6; cursor:not-allowed; }
 .notify-msg{ margin-top:0.8rem; font-size:0.78rem; color:var(--ink-muted); }
@@ -268,6 +296,10 @@ nav ul a:hover{ color:var(--violet); }
   font-family:'Hanken Grotesk', sans-serif; font-size:0.92rem; color:var(--ink);
 }
 .cover-song-row .artist{ color:var(--ink-muted); font-size:0.8rem; white-space:nowrap; }
+@media(max-width:760px){
+  .cover-song-row{ flex-direction:column; align-items:flex-start; gap:0.1rem; }
+  .cover-song-row .artist{ white-space:normal; font-size:0.78rem; }
+}
 
 .proximas{ margin-top:4.5rem; padding-top:3rem; border-top:1px solid var(--line); }
 .proximas-title{ font-style:italic; font-size:clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom:0.5rem; }
@@ -344,19 +376,11 @@ nav ul a:hover{ color:var(--violet); }
 }
 .gallery-arrow:hover{ background:var(--gold); color:var(--bg); }
 
+/* En mobile seguimos usando carrusel horizontal (no apilado), con tarjetas mas chicas */
 @media(max-width:760px){
-  .gallery-wrap{ flex-direction:column; }
-  .gallery-arrow{ display:none; }
-  .gallery-grid{
-    flex-direction:column;
-    overflow-x:visible;
-    scroll-snap-type:none;
-  }
-  .gallery-item, .gallery-item-video{
-    width:100%;
-    aspect-ratio:4/5;
-  }
-  .gallery-item-video{ aspect-ratio:16/9; }
+  .gallery-arrow{ width:34px; height:34px; font-size:0.85rem; }
+  .gallery-item{ width:min(200px, 62vw); }
+  .gallery-item-video{ width:min(280px, 78vw); }
 }
 
 /* ---------- AGENDA ---------- */
@@ -421,11 +445,14 @@ nav ul a:hover{ color:var(--violet); }
   to{ opacity:1; transform:translateY(0); }
 }
 .socials{
-  margin-top:3rem; display:flex; justify-content:center; gap:2rem;
+  margin-top:3rem; display:flex; justify-content:center; flex-wrap:wrap; gap:0.8rem 2rem;
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.7rem; letter-spacing:0.1em;
   text-transform:uppercase; color:var(--ink-muted);
 }
 .socials a:hover{ color:var(--violet); }
+@media(max-width:760px){
+  .socials{ gap:0.7rem 1.3rem; font-size:0.66rem; }
+}
 
 /* ---------- FOOTER ---------- */
 footer{

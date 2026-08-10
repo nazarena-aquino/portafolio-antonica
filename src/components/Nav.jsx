@@ -1,17 +1,53 @@
+import { useState } from 'react';
+
+const links = [
+  { href: '#bio', label: 'Sobre mí' },
+  { href: '#maternidad', label: 'Maternidad' },
+  { href: '#musica', label: 'Música' },
+  { href: '#covers', label: 'Covers' },
+  { href: '#libro', label: 'Libro' },
+  { href: '#galeria', label: 'Galería' },
+  { href: '#agenda', label: 'Agenda' },
+  { href: '#contacto', label: 'Contacto' },
+];
+
 export default function Nav() {
+  const [open, setOpen] = useState(false);
+
   return (
     <nav>
-      <div className="brand">Antónica<span>✧</span></div>
-      <ul>
-        <li><a href="#bio">Sobre mi</a></li>
-        <li><a href="#maternidad">Maternidad</a></li>
-        <li><a href="#musica">Música</a></li>
-        <li><a href="#covers">Covers</a></li>
-        <li><a href="#libro">Libro</a></li>
-        <li><a href="#galeria">Galería</a></li>
-        {/*<li><a href="#agenda">Agenda</a></li>*/}
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
+      <div className="nav-bar">
+        <div className="brand">
+          Antónica<span>✧</span>
+        </div>
+
+        <ul className="nav-links-desktop">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          className="nav-toggle"
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? '✕' : '☰'}
+        </button>
+      </div>
+
+      {open && (
+        <div className="nav-mobile-menu">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
