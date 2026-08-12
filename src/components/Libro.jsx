@@ -3,17 +3,27 @@ import { supabase } from '../lib/supabaseClient';
 
 export default function Libro() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('idle'); // idle | loading | ok | error
+  const [status, setStatus] = useState('idle'); // idle | loading | ok | duplicate | error
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!email) return;
     setStatus('loading');
+
     const { error } = await supabase
       .from('libro_avisos')
       .insert([{ email }]);
-    setStatus(error ? 'error' : 'ok');
-    if (!error) setEmail('');
+
+    if (!error) {
+      setStatus('ok');
+      setEmail('');
+    } else if (error.code === '23505') {
+      // 23505 = violación de restricción "unique" en Postgres,
+      // es decir: ese email ya estaba anotado antes.
+      setStatus('duplicate');
+    } else {
+      setStatus('error');
+    }
   }
 
   return (
@@ -40,7 +50,10 @@ export default function Libro() {
             </button>
           </form>
           {status === 'ok' && (
-            <p className="notify-msg">¡Listo! Te avisamos apenas salga.</p>
+            <p className="notify-msg">¡Listo! Te aviso apenas salga.</p>
+          )}
+          {status === 'duplicate' && (
+            <p className="notify-msg">Ya estás anotado/a — te voy a avisar apenas salga.</p>
           )}
           {status === 'error' && (
             <p className="notify-msg">

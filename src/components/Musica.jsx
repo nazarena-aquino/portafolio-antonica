@@ -13,6 +13,25 @@ const tracks = [
   },
 ];
 
+function ArrowIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="7" y1="17" x2="17" y2="7" />
+      <polyline points="7 7 17 7 17 17" />
+    </svg>
+  );
+}
+
 export default function Musica() {
   return (
     <section className="musica" id="musica">
@@ -45,7 +64,8 @@ export default function Musica() {
             target="_blank"
             rel="noreferrer"
           >
-            Escuchar Géminis ↗
+            Escuchar Géminis
+            <ArrowIcon />
           </a>
         </div>
       </div>

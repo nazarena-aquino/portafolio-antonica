@@ -12,9 +12,10 @@ nav{
 .brand{ font-family:'Playfair Display', serif; font-size:1.15rem; letter-spacing:0.04em; color:var(--gold); display:flex; align-items:center; gap:0.4rem; }
 .brand span{ color:var(--violet); }
 .nav-links-desktop{
-  list-style:none; display:flex; gap:2.2rem;
-  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
-  letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-muted);
+  list-style:none; display:flex; gap:1.5rem;
+  font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.68rem;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-muted);
+  white-space:nowrap;
 }
 .nav-links-desktop a:hover{ color:var(--violet); }
 .nav-toggle{
@@ -35,7 +36,7 @@ nav{
 }
 .nav-mobile-menu a:last-child{ border-bottom:none; }
 .nav-mobile-menu a:hover{ color:var(--violet); }
-@media(max-width:760px){
+@media(max-width:900px){
   .nav-links-desktop{ display:none; }
   .nav-toggle{ display:block; }
 }
@@ -285,11 +286,20 @@ nav{
   margin-top:3rem;
 }
 @media(max-width:760px){ .covers-list{ grid-template-columns:1fr; gap:2rem; } }
-.cover-genre h4{
+.cover-genre h4,
+.cover-genre summary{
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
   letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);
   margin-bottom:0.8rem;
+  cursor:pointer; list-style:none;
+  display:flex; align-items:center; justify-content:space-between;
 }
+.cover-genre summary::-webkit-details-marker{ display:none; }
+.cover-genre summary::after{
+  content:'+'; color:var(--gold); font-size:0.9rem; font-weight:400;
+  margin-left:0.6rem;
+}
+.cover-genre[open] summary::after{ content:'−'; }
 .cover-song-row{
   display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
   padding:0.55rem 0; border-top:1px solid var(--line);

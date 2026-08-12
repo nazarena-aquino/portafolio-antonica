@@ -16,7 +16,9 @@ export default function Maternidad() {
             estoy viviendo en el cuerpo.
           </p>
           <blockquote>
-            [ Antes de saber que existías, ya te estaba escribiendo. Hoy esas palabras viven en un libro que también es tuyo. ]
+            [ Antes de saber que existías, ya te estaba escribiendo. Hoy
+            esas palabras viven en un libro que también es
+            <span style={{ whiteSpace: 'nowrap' }}> tuyo. ]</span>
           </blockquote>
           <p>
             La música y la maternidad conviven en esta etapa: sigo

@@ -161,15 +161,15 @@ export default function Covers() {
 
       <div className="covers-list">
         {repertorio.map((grupo) => (
-          <div className="cover-genre" key={grupo.genero}>
-            <h4>{grupo.genero}</h4>
+          <details className="cover-genre" key={grupo.genero} open>
+            <summary>{grupo.genero}</summary>
             {grupo.canciones.map((c) => (
               <div className="cover-song-row" key={c.titulo}>
                 <span>{c.titulo}</span>
                 <span className="artist">{c.artista}</span>
               </div>
             ))}
-          </div>
+          </details>
         ))}
       </div>
 
