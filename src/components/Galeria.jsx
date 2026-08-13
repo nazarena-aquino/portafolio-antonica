@@ -9,7 +9,7 @@ function getYouTubeId(url) {
   return match ? match[1] : null;
 }
 
-function GalleryRow({ label, items, loading, renderItem, itemVariant }) {
+function GalleryRow({ label, items, loading, renderItem, itemVariant, onItemClick }) {
   const trackRef = useRef(null);
 
   function scrollByCard(direction) {
@@ -35,8 +35,23 @@ function GalleryRow({ label, items, loading, renderItem, itemVariant }) {
         <div className="gallery-grid" ref={trackRef}>
           {items.map((item, i) => (
             <div
-              className={`gallery-item${itemVariant ? ' ' + itemVariant : ''}`}
+              className={`gallery-item${itemVariant ? ' ' + itemVariant : ''}${
+                item && onItemClick ? ' gallery-item-clickable' : ''
+              }`}
               key={item?.id ?? i}
+              onClick={item && onItemClick ? () => onItemClick(i) : undefined}
+              role={item && onItemClick ? 'button' : undefined}
+              tabIndex={item && onItemClick ? 0 : undefined}
+              onKeyDown={
+                item && onItemClick
+                  ? (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onItemClick(i);
+                      }
+                    }
+                  : undefined
+              }
             >
               {!item && (loading ? 'cargando…' : label.toLowerCase())}
               {item && renderItem(item)}
@@ -59,6 +74,8 @@ function GalleryRow({ label, items, loading, renderItem, itemVariant }) {
 export default function Galeria() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lightbox, setLightbox] = useState(null);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     let active = true;
@@ -85,6 +102,39 @@ export default function Galeria() {
   const fotosList = fotos.length ? fotos : Array.from({ length: 4 });
   const videosList = videos.length ? videos : Array.from({ length: 2 });
 
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') setLightbox((i) => (i + 1) % fotosList.length);
+      if (e.key === 'ArrowLeft')
+        setLightbox((i) => (i - 1 + fotosList.length) % fotosList.length);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightbox, fotosList.length]);
+
+  const openPhoto = fotosList[lightbox];
+
+  function handleTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e) {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0)
+        setLightbox((i) => (i + 1) % fotosList.length);
+      else setLightbox((i) => (i - 1 + fotosList.length) % fotosList.length);
+    }
+  }
+
   return (
     <section>
       <section id="galeria"></section>
@@ -97,6 +147,7 @@ export default function Galeria() {
         label="Fotos"
         items={fotosList}
         loading={loading}
+        onItemClick={(i) => setLightbox(i)}
         renderItem={(item) => (
           <img src={item.url} alt={item.alt_text || 'Antónica'} loading="lazy" />
         )}
@@ -123,6 +174,51 @@ export default function Galeria() {
           return <video src={item.url} controls playsInline />;
         }}
       />
+
+      {lightbox !== null && openPhoto && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Vista completa de la foto"
+          onClick={() => setLightbox(null)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <button
+            className="lightbox-close"
+            aria-label="Cerrar"
+            onClick={() => setLightbox(null)}
+          >
+            ✕
+          </button>
+          <button
+            className="lightbox-nav lightbox-prev"
+            aria-label="Foto anterior"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox((i) => (i - 1 + fotosList.length) % fotosList.length);
+            }}
+          >
+            ←
+          </button>
+          <img
+            src={openPhoto.url}
+            alt={openPhoto.alt_text || 'Antónica'}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            className="lightbox-nav lightbox-next"
+            aria-label="Foto siguiente"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightbox((i) => (i + 1) % fotosList.length);
+            }}
+          >
+            →
+          </button>
+        </div>
+      )}
     </section>
   );
 }
