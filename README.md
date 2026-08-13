@@ -1,5 +1,4 @@
-# Antónica — Portfolio oficial
-
+# Antónica — Portfolio oficial NAZA
 Sitio de promoción para Antónica (cantante y escritora, Formosa, Argentina).
 React + Vite + Supabase. Sin backend propio: Supabase hace de base de datos,
 storage de archivos y API.
@@ -14,7 +13,7 @@ cp .env.example .env
 npm run dev
 ```
 
-## Supabase — setup inicial
+## Supabase — setup inicial 0
 
 1. Creá un proyecto nuevo en https://supabase.com
 2. Andá a **SQL Editor** y corré todo el contenido de `supabase/schema.sql`
