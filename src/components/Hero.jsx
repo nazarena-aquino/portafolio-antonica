@@ -126,8 +126,6 @@ export default function Hero() {
           />
         ))}
       </div>
-
-      <div className="scroll-cue">Deslizar</div>
     </section>
   );
 }

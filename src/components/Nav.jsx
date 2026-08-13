@@ -30,7 +30,7 @@ export default function Nav() {
         </ul>
 
         <button
-          className="nav-toggle"
+          className={`nav-toggle${open ? ' open' : ''}`}
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
@@ -39,15 +39,15 @@ export default function Nav() {
         </button>
       </div>
 
-      {open && (
-        <div className="nav-mobile-menu">
+      <div className={`nav-mobile-menu${open ? ' open' : ''}`}>
+        <div className="nav-mobile-menu-inner">
           {links.map((l) => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}
             </a>
           ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 }

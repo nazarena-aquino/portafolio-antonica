@@ -59,6 +59,11 @@ section{
   font-style:italic;
 }
 
+@media(max-width:760px){
+  section{ padding:2.5rem 6vw; }
+  .section-head{ margin-bottom:2rem; }
+}
+
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   *{ animation:none !important; transition:none !important; }
