@@ -136,6 +136,8 @@ nav{
   .hero-track{ height:52vh; }
   .hero-slide{ height:52vh; padding:5.5rem 6vw 2.5rem; }
   .hero h1{ font-size:clamp(1.8rem, 7vw, 2.6rem); }
+  .hero-controls{ display:none; }
+  .scroll-cue{ left:50%; right:auto; transform:translateX(-50%); }
 }
 
 /* ---------- BIO ---------- */
@@ -289,19 +291,40 @@ nav{
 }
 @media(max-width:760px){ .covers-list{ grid-template-columns:1fr; gap:2rem; } }
 .cover-genre h4,
-.cover-genre summary{
+.cover-genre summary,
+.cover-genre-toggle{
   font-family:'Hanken Grotesk', sans-serif; font-weight:600; font-size:0.72rem;
   letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);
   margin-bottom:0.8rem;
   cursor:pointer; list-style:none;
   display:flex; align-items:center; justify-content:space-between;
 }
+.cover-genre-toggle{
+  width:100%; background:transparent; border:none; padding:0; text-align:left;
+}
 .cover-genre summary::-webkit-details-marker{ display:none; }
-.cover-genre summary::after{
+.cover-genre summary::after,
+.cover-genre-toggle::after{
   content:'+'; color:var(--gold); font-size:0.9rem; font-weight:400;
   margin-left:0.6rem;
+  transition:transform 0.35s ease;
 }
-.cover-genre[open] summary::after{ content:'−'; }
+.cover-genre[open] summary::after,
+.cover-genre.open .cover-genre-toggle::after{ transform:rotate(45deg); }
+.cover-genre .cover-songs{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows 0.5s cubic-bezier(0.65,0,0.35,1);
+}
+.cover-genre[open] .cover-songs,
+.cover-genre.open .cover-songs{ grid-template-rows:1fr; }
+.cover-genre .cover-songs-inner{
+  overflow:hidden; min-height:0;
+  opacity:0;
+  transition:opacity 0.35s ease;
+}
+.cover-genre[open] .cover-songs-inner,
+.cover-genre.open .cover-songs-inner{ opacity:1; }
 .cover-song-row{
   display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
   padding:0.55rem 0; border-top:1px solid var(--line);

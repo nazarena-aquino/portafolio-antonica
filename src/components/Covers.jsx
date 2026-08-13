@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const repertorio = [
   {
     genero: 'Rock Nacional',
@@ -146,6 +148,31 @@ const proximasCanciones = [
   },
 ];
 
+function CoverGenre({ grupo }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`cover-genre${open ? ' open' : ''}`}>
+      <button
+        className="cover-genre-toggle"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+      >
+        {grupo.genero}
+      </button>
+      <div className="cover-songs">
+        <div className="cover-songs-inner">
+          {grupo.canciones.map((c) => (
+            <div className="cover-song-row" key={c.titulo}>
+              <span>{c.titulo}</span>
+              <span className="artist">{c.artista}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Covers() {
   return (
     <section className="covers" id="covers">
@@ -161,15 +188,7 @@ export default function Covers() {
 
       <div className="covers-list">
         {repertorio.map((grupo) => (
-          <details className="cover-genre" key={grupo.genero} open>
-            <summary>{grupo.genero}</summary>
-            {grupo.canciones.map((c) => (
-              <div className="cover-song-row" key={c.titulo}>
-                <span>{c.titulo}</span>
-                <span className="artist">{c.artista}</span>
-              </div>
-            ))}
-          </details>
+          <CoverGenre grupo={grupo} key={grupo.genero} />
         ))}
       </div>
 

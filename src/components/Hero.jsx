@@ -27,6 +27,7 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
   const trackRef = useRef(null);
   const timerRef = useRef(null);
+  const touchStartX = useRef(null);
 
   function goTo(index) {
     const next = (index + slides.length) % slides.length;
@@ -51,8 +52,27 @@ export default function Hero() {
     }
   }, [current]);
 
+  function handleTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e) {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) goTo(current + 1);
+      else goTo(current - 1);
+      resetTimer();
+    }
+  }
+
   return (
-    <section className="hero">
+    <section
+      className="hero"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="hero-track" ref={trackRef}>
         {slides.map((slide, i) => (
           <div className={`hero-slide hero-slide-${i + 1}`} key={slide.id}>
